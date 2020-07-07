@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
 import com.example.app.R
+import com.example.core.utils.dp2px
 import java.util.*
 
 /**
@@ -41,7 +42,7 @@ class CodeView : AppCompatTextView {
         paint.setAntiAlias(true)
         paint.setStyle(Paint.Style.STROKE)
         paint.setColor(getContext().getColor(R.color.colorAccent))
-        paint.setStrokeWidth(Utils.dp2px(6f))
+        paint.setStrokeWidth(dp2px(6f))
 
         updateCode()
     }

@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.example.app.entity.User
 import com.example.app.widget.CodeView
 import com.example.core.utils.CacheUtils
+import com.example.core.utils.toast
 import com.example.lesson.LessonActivity
 
 /**
@@ -63,11 +64,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     fun verify(user: User): Boolean{
         if (user.username != null && user.username!!.length < 4){
-            Utils.toast("用户名不合法")
+            toast("用户名不合法")
             return false
         }
         if (user.password != null && user.password!!.length < 4){
-            Utils.toast("密码不合法")
+            toast("密码不合法")
             return false
         }
         return true

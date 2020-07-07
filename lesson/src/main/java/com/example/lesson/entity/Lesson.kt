@@ -8,26 +8,26 @@ package com.example.lesson.entity
 class Lesson {
     enum class State{
         PLAYBACK{
-            fun stateName(): String{
+            override fun stateName(): String{
                 return "有回放"
             }
         },
         LIVE{
-            fun stateName(): String{
+            override fun stateName(): String{
                 return "正在直播"
             }
         },
         WAIT{
-            fun stateName(): String{
+            override fun stateName(): String{
                 return "等待中"
             }
         };
-        fun stateName(): String
+        abstract fun stateName(): String
     }
 
-    private var data: String? = null
-    private var content: String? = null
-    private var state: State? = null
+    var data: String
+    var content: String
+    var state: State
 
     constructor(data: String, content: String, state: State){
         this.data = data
