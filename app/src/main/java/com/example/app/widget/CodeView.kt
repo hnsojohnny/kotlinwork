@@ -17,9 +17,9 @@ import java.util.*
  * @date: 2020/7/7
  * @description:
  */
-class CodeView : AppCompatTextView {
+class CodeView constructor(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
 
-    private val paint = Paint()
+    private lateinit var paint: Paint
     private val codeList = listOf(
             "kotlin",
             "android",
@@ -31,19 +31,16 @@ class CodeView : AppCompatTextView {
             "tcp/ip")
 
     constructor(context: Context) : this(context, null) {
-    }
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-        setGravity(Gravity.CENTER)
+        gravity = Gravity.CENTER
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
-
-        paint.setAntiAlias(true)
-        paint.setStyle(Paint.Style.STROKE)
-        paint.setColor(getContext().getColor(R.color.colorAccent))
-        paint.setStrokeWidth(dp2px(6f))
-
+        paint = Paint().apply {
+            isAntiAlias = true
+            style = Paint.Style.STROKE
+            color = getContext().getColor(R.color.colorAccent)
+            strokeWidth = 6f.dp2px()
+        }
         updateCode()
     }
 
