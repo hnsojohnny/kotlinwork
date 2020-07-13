@@ -19,7 +19,12 @@ import java.util.*
  */
 class CodeView constructor(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
 
-    private lateinit var paint: Paint
+    private var paint: Paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
+    }
     private val codeList = listOf(
             "kotlin",
             "android",
@@ -30,19 +35,15 @@ class CodeView constructor(context: Context, attrs: AttributeSet?) : AppCompatTe
             "retrofit",
             "tcp/ip")
 
-    constructor(context: Context) : this(context, null) {
+    init {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         gravity = Gravity.CENTER
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
-        paint = Paint().apply {
-            isAntiAlias = true
-            style = Paint.Style.STROKE
-            color = getContext().getColor(R.color.colorAccent)
-            strokeWidth = 6f.dp2px()
-        }
         updateCode()
     }
+
+    constructor(context: Context) : this(context, null)
 
     fun updateCode(){
         val random = Random().nextInt(codeList.size)

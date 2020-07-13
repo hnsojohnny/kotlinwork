@@ -5,7 +5,7 @@ package com.example.lesson.entity
  * @date: 2020/7/7
  * @description:
  */
-class Lesson {
+data class Lesson constructor(var data: String, var content: String, var state: State){
     enum class State{
         PLAYBACK{
             override fun stateName(): String{
@@ -23,15 +23,5 @@ class Lesson {
             }
         };
         abstract fun stateName(): String
-    }
-
-    var data: String
-    var content: String
-    var state: State
-
-    constructor(data: String, content: String, state: State){
-        this.data = data
-        this.content = content
-        this.state = state
     }
 }

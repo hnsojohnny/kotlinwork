@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
  * @date: 2020/7/7
  * @description:
  */
-abstract class BaseViewHolder : RecyclerView.ViewHolder{
+abstract class BaseViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-    constructor(itemView: View): super(itemView){}
-
-    val viewHashMap = hashMapOf<Int, View>()
+    private val viewHashMap = hashMapOf<Int, View>()
 
     fun <T : View> getView(id: Int): T{
         var view = viewHashMap[id]
@@ -21,7 +19,7 @@ abstract class BaseViewHolder : RecyclerView.ViewHolder{
             view = itemView.findViewById(id)
             viewHashMap[id] = view
         }
-        return view as T
+        return view!! as T
     }
 
     fun setText(id: Int, text: String){

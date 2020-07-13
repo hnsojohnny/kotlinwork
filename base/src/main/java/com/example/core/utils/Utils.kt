@@ -18,7 +18,7 @@ fun Float.dp2px(): Float{
 }
 
 fun toast(string: String?, duration: Int = Toast.LENGTH_SHORT){
-    Toast.makeText(BaseApplication.currentApplication(), string, duration).show()
+    Toast.makeText(BaseApplication.currentApplication, string, duration).show()
 }
 
 
