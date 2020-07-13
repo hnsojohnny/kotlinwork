@@ -12,7 +12,7 @@ import java.lang.reflect.Type
  */
 object HttpClient : OkHttpClient(){
 
-    val gson = Gson()
+    private val gson = Gson()
 
     fun <T> convert(json: String?, type: Type): T{
         return gson.fromJson(json, type)

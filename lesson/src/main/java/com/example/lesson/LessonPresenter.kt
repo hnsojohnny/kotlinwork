@@ -7,26 +7,20 @@ import com.example.lesson.entity.Lesson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
-class LessonPresenter {
+class LessonPresenter constructor(var activity: LessonActivity?){
     companion object{
         const val LESSON_PATH = "lessons"
     }
-    private var activity: LessonActivity? = null
-
-    constructor(activity: LessonActivity){
-        this.activity = activity
-    }
-
     private var lessons: List<Lesson> = ArrayList()
 
-    val type: Type = object : TypeToken<List<Lesson>>(){}.type
+    private val type: Type = object : TypeToken<List<Lesson>>(){}.type
 
-    fun fetchData(){
+    fun fetchData(action: (lessons: List<Lesson>) -> Unit){
         HttpClient.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>>{
             override fun onSuccess(entity: List<Lesson>) {
                 this@LessonPresenter.lessons = entity
                 activity?.runOnUiThread {
-                    activity?.showResult(lessons)
+                    action(lessons)
                 }
             }
 
@@ -36,11 +30,9 @@ class LessonPresenter {
         })
     }
 
-    fun showPlayback(){
-        var playbackLessons = ArrayList<Lesson>()
-        for (lesson in playbackLessons){
-            playbackLessons.add(lesson)
-        }
-        activity?.showResult(playbackLessons)
+        fun showPlayback(action: (lessons: List<Lesson>) -> Unit){
+        var playbackLessons = lessons.filter { it.state == Lesson.State.PLAYBACK }
+        action(playbackLessons)
     }
+
 }
